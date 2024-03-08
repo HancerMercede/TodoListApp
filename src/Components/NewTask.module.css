@@ -1,0 +1,50 @@
+.container {
+    font-family: "Oswald", sans-serif;
+    width: 875px;
+    margin: auto;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form input {
+    padding: 5px;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 14px;
+}
+
+.form textarea {
+    height: 100px;
+    padding: 5px;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 14px;
+}
+
+.btn_btn_primary {
+    border: none;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-radius: 2px;
+    background: linear-gradient(to left, #59a0e2, #fff);
+    color: #fff;
+    text-transform: uppercase;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        width: 400px;
+    }
+}

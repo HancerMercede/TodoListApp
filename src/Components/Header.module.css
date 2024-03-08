@@ -1,0 +1,10 @@
+.container {
+    text-align: center;
+    margin: 10px 0px;
+
+}
+
+.container h1 {
+    color: white;
+    text-transform: uppercase;
+}
