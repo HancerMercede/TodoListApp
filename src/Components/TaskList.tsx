@@ -17,7 +17,7 @@ export const TaskList = () => {
 
   return (
     <>
-      <NewTask createNewTask={onCreateNewTask} />
+      <NewTask newTaskFunction={onCreateNewTask} />
       <div className={style.TaskListContainer}>
         <ul>
           {newTask?.map((t) => (

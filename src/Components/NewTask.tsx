@@ -1,6 +1,7 @@
 import { SetStateAction, useState } from "react";
 import style from "./NewTask.module.css";
 import Task from "../models/Task.td";
+import TaskFunction from "../models/TaskFunction.td";
 
 let task: Task = {
   id: 0,
@@ -9,7 +10,7 @@ let task: Task = {
   completed: false,
 };
 
-export const NewTask = ({ createNewTask }) => {
+export const NewTask = ({ newTaskFunction }: TaskFunction) => {
   const [Title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
 
@@ -37,8 +38,7 @@ export const NewTask = ({ createNewTask }) => {
       completed: false,
     };
 
-    console.log(task);
-    createNewTask(task);
+    newTaskFunction(task);
     onClear();
   };
 
