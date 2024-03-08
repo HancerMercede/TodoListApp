@@ -1,5 +1,7 @@
+import Task from "./Task.td";
+
 interface TaskFunction  {
-    newTaskFunction: () => void;
+    newTaskFunction: (arg:Task) => void;
   }
   
   export default TaskFunction;
