@@ -11,7 +11,7 @@ export const TaskList = () => {
   const onCreateNewTask = (task: Task) => {
     if (task.Title === "") return;
 
-    task.id = newTask.length + 1;
+    task.id = newTask?.length + 1;
     setNewTask([task, ...newTask]);
   };
 
