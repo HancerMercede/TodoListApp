@@ -1,6 +1,8 @@
 import { useState } from "react";
 import Task from "../models/Task.td";
 import style from "./TaskCard.module.css";
+import { FiEdit } from "react-icons/fi";
+import { MdDoneOutline } from "react-icons/md";
 
 export const TaskCard = (props: { task: Task }) => {
   const [completeTask, setCompleteTask] = useState(props.task.completed);
@@ -25,14 +27,14 @@ export const TaskCard = (props: { task: Task }) => {
             className={style.btn_btn_primary}
             onClick={onCompleteTask}
           >
-            Complete
+            <MdDoneOutline size={20} />
           </button>
           <button
             type="button"
             className={style.btn_btn_secundary}
             onClick={onReOpenTask}
           >
-            Re-Open
+            <FiEdit size={20} />
           </button>
         </div>
       </div>

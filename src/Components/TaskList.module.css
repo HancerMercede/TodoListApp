@@ -1,24 +1,24 @@
 .TaskListContainer {
-    width: 1200px;
+    width: 825px;
     margin: auto;
 }
 
-.TaskListContainer ul {
-    display: grid;
+/* .TaskListContainer ul {
+     display: grid;
     grid-template-columns: repeat(auto-fill, 300px);
     gap: 8px;
-    justify-content: center;
-}
+    justify-content: center; 
+} */
 
 @media screen and (max-width:600px) {
     .TaskListContainer {
         width: 100%;
     }
 
-    .TaskListContainer ul {
+    /* .TaskListContainer ul {
         display: flex;
         justify-content: center;
         flex-direction: column;
         align-items: center;
-    }
+    } */
 }

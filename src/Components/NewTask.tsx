@@ -37,7 +37,7 @@ export const NewTask = ({ newTaskFunction }: TaskFunction) => {
       Description: description,
       completed: false,
     };
-
+    console.log(task);
     newTaskFunction(task);
     onClear();
   };

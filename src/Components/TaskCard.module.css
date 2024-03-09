@@ -16,9 +16,8 @@
     padding: 5px;
     margin: 10px 0 0 0;
     border-radius: 2px;
-    background-color: #3498DB;
-    color: #fff;
-
+    background-color: transparent;
+    color: #504f4f;
 }
 
 .btn_btn_secundary {
@@ -26,9 +25,16 @@
     padding: 5px;
     margin: 10px 0 0 0;
     border-radius: 2px;
-    background-color: #83878a;
-    color: #fff;
+    background-color: transparent;
+    color: #504f4f;
+}
 
+.btn_btn_primary:hover {
+    color: #3480ec;
+}
+
+.btn_btn_secundary:hover {
+    color: #34db63;
 }
 
 h3 {
@@ -39,4 +45,5 @@ h3 {
 .buttonWrapper {
     display: flex;
     gap: 5px;
+    justify-content: flex-end;
 }
