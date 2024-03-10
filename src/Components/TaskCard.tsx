@@ -1,25 +1,28 @@
 import { useState } from "react";
-import Task from "../models/Task.td";
 import style from "./TaskCard.module.css";
 import { FiEdit } from "react-icons/fi";
 import { MdDoneOutline } from "react-icons/md";
+import Todo from "../models/Todo.td";
 
-export const TaskCard = (props: { task: Task }) => {
-  const [completeTask, setCompleteTask] = useState(props.task.completed);
+export const TaskCard = ({ task, onEditTask }: Todo) => {
+  const { Title, Description, completed } = task;
+
+  const [completeTask, setCompleteTask] = useState(completed);
 
   const onCompleteTask = () => {
     setCompleteTask(true);
   };
 
   const onReOpenTask = () => {
+    onEditTask(task);
     setCompleteTask(false);
   };
 
   return (
     <>
       <div className={style.CardContainer}>
-        <h3>{props.task.Title}</h3>
-        <p>{props.task.Description}</p>
+        <h3>{Title}</h3>
+        <p>{Description}</p>
         <p>{!completeTask ? "❌" : "✅"}</p>
         <div className={style.buttonWrapper}>
           <button

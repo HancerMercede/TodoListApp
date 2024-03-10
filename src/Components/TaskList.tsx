@@ -7,9 +7,12 @@ import taskArray from "../Persistence/db";
 
 export const TaskList = () => {
   const [todos, setTodos] = useState(taskArray);
+  const [todo, setTodo] = useState<Task>();
 
+  // Here i call the item todolist in the localstorage
   const todolist = JSON.parse(localStorage.getItem("todolist")!);
 
+  // and here i knnow this key doesn't exist so i create it.
   if (!todolist) {
     localStorage.setItem("todolist", JSON.stringify(taskArray));
   }
@@ -22,17 +25,40 @@ export const TaskList = () => {
     localStorage.setItem("todolist", JSON.stringify([task, ...todos]));
   };
 
+  const onEditTask = (task: Task) => {
+    console.log(task);
+    const todo = todos.filter((todo) => todo.id === task.id);
+
+    todo.forEach((el) => {
+      setTodo(el);
+    });
+
+    const newArray = todos.filter((todo) => todo.id !== task.id);
+    setTodos(newArray);
+    localStorage.setItem("todolist", JSON.stringify(newArray));
+  };
+
+  const onUpdatedTask = (task: Task) => {
+    task.id = todos?.length + 1;
+    setTodos([task, ...todos]);
+    localStorage.setItem("todolist", JSON.stringify([task, ...todos]));
+  };
+
   useEffect(() => {
     setTodos(JSON.parse(localStorage.getItem("todolist")!));
   }, [setTodos]);
 
   return (
     <>
-      <NewTask newTaskFunction={onCreateNewTask} />
+      <NewTask
+        newTaskFunction={onCreateNewTask}
+        updatedTaskFunction={onUpdatedTask}
+        task={todo!}
+      />
       <div className={style.TaskListContainer}>
         <ul>
           {todos?.map((t) => (
-            <TaskCard key={t.id} task={t} />
+            <TaskCard key={t.id} task={t} onEditTask={onEditTask} />
           ))}
         </ul>
       </div>
