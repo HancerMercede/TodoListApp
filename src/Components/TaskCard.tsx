@@ -3,8 +3,9 @@ import style from "./TaskCard.module.css";
 import { FiEdit } from "react-icons/fi";
 import { MdDoneOutline } from "react-icons/md";
 import Todo from "../models/Todo.td";
+import { PiTrashSimple } from "react-icons/pi";
 
-export const TaskCard = ({ task, onEditTask }: Todo) => {
+export const TaskCard = ({ task, onEditTask, onDeleteTask }: Todo) => {
   const { Title, Description, completed } = task;
 
   const [completeTask, setCompleteTask] = useState(completed);
@@ -16,6 +17,10 @@ export const TaskCard = ({ task, onEditTask }: Todo) => {
   const onReOpenTask = () => {
     onEditTask(task);
     setCompleteTask(false);
+  };
+
+  const onDeleteTodo = () => {
+    onDeleteTask(task);
   };
 
   return (
@@ -38,6 +43,13 @@ export const TaskCard = ({ task, onEditTask }: Todo) => {
             onClick={onReOpenTask}
           >
             <FiEdit size={20} />
+          </button>
+          <button
+            type="button"
+            className={style.btn_btn_secundary}
+            onClick={onDeleteTodo}
+          >
+            <PiTrashSimple size={20} />
           </button>
         </div>
       </div>

@@ -48,6 +48,13 @@ export const TaskList = () => {
     setTodo(null);
   };
 
+  const onDeleteTask = (task: Task) => {
+    console.log(task.id);
+    const newArray = todos.filter((todo) => todo.id !== task.id);
+    setTodos(newArray);
+    localStorage.setItem("todolist", JSON.stringify(newArray));
+  };
+
   useEffect(() => {
     setTodos(JSON.parse(localStorage.getItem("todolist")!));
   }, [setTodos]);
@@ -62,7 +69,12 @@ export const TaskList = () => {
       <div className={style.TaskListContainer}>
         <ul>
           {todos?.map((t) => (
-            <TaskCard key={t.id} task={t} onEditTask={onEditTask} />
+            <TaskCard
+              key={t.id}
+              task={t}
+              onEditTask={onEditTask}
+              onDeleteTask={onDeleteTask}
+            />
           ))}
         </ul>
       </div>
