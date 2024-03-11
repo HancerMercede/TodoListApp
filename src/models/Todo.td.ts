@@ -4,6 +4,7 @@ interface Todo {
     task:Task,
     onEditTask:(arg:Task) => void;
     onDeleteTask:(arg:Task) => void;
+    onCompleteTask:(arg:Task) => void;
 }
 
 export default Todo;

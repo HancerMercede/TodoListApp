@@ -8,7 +8,12 @@ import { v4 as uuid4 } from "uuid";
 
 export const TaskList = () => {
   const [todos, setTodos] = useState(taskArray);
+  const [doneTask, setDoneTask] = useState(taskArray);
   const [todo, setTodo] = useState<null | Task>();
+
+  useEffect(() => {
+    setTodos(JSON.parse(localStorage.getItem("todolist")!));
+  }, [setTodos]);
 
   // Here i call the item todolist in the localstorage
   const todolist = JSON.parse(localStorage.getItem("todolist")!);
@@ -18,11 +23,19 @@ export const TaskList = () => {
     localStorage.setItem("todolist", JSON.stringify(taskArray));
   }
 
+  // Here i call the item todolist in the localstorage
+  const CompletedTodoList = JSON.parse(
+    localStorage.getItem("completedtodolist")!
+  );
+
+  if (!CompletedTodoList) {
+    localStorage.setItem("completedtodolist", JSON.stringify(taskArray));
+  }
+
   const onCreateNewTask = (task: Task) => {
     if (task.Title === "" || task.Description === "") return;
 
     task.id = uuid4();
-    console.log(task.id);
     setTodos([task, ...todos]);
     localStorage.setItem("todolist", JSON.stringify([task, ...todos]));
   };
@@ -55,10 +68,27 @@ export const TaskList = () => {
     localStorage.setItem("todolist", JSON.stringify(newArray));
   };
 
-  useEffect(() => {
-    setTodos(JSON.parse(localStorage.getItem("todolist")!));
-  }, [setTodos]);
+  const onCompleteTask = (task: Task) => {
+    // Saving the completed todo in a constant variable
+    const completedTodo = task;
 
+    // Setting the completed todos state to manage that information.
+    setDoneTask([completedTodo, ...doneTask]);
+
+    // Setting the localstorage data to consume later
+    localStorage.setItem(
+      "completedtodolist",
+      JSON.stringify([completedTodo, ...doneTask])
+    );
+
+    // and removing the todo from the main state
+    const newArray = todos.filter((todo) => todo.id !== task.id);
+    // Setting the new state in to the main localstorage.
+
+    setTodos(newArray);
+    localStorage.setItem("todolist", JSON.stringify(newArray));
+  };
+  console.log(JSON.parse(JSON.stringify(CompletedTodoList)));
   return (
     <>
       <NewTask
@@ -74,6 +104,7 @@ export const TaskList = () => {
               task={t}
               onEditTask={onEditTask}
               onDeleteTask={onDeleteTask}
+              onCompleteTask={onCompleteTask}
             />
           ))}
         </ul>
