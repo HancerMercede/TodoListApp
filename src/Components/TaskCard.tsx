@@ -46,7 +46,7 @@ export const TaskCard = ({ task, onEditTask, onDeleteTask }: Todo) => {
           </button>
           <button
             type="button"
-            className={style.btn_btn_secundary}
+            className={style.btn_btn_dander}
             onClick={onDeleteTodo}
           >
             <PiTrashSimple size={20} />
