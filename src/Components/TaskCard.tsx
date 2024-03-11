@@ -4,6 +4,7 @@ import { FiEdit } from "react-icons/fi";
 import { MdDoneOutline } from "react-icons/md";
 import Todo from "../models/Todo.td";
 import { PiTrashSimple } from "react-icons/pi";
+import Swal from "sweetalert2";
 
 export const TaskCard = ({
   task,
@@ -23,8 +24,13 @@ export const TaskCard = ({
       Description: task.Description,
       completed: true,
     };
-    console.log(completedTodo);
-    onCompleteTask(completedTodo);
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "Your task has been completed",
+      showConfirmButton: false,
+      timer: 1500,
+    }).then(() => onCompleteTask(completedTodo));
   };
 
   const onReOpenTask = () => {
@@ -33,7 +39,23 @@ export const TaskCard = ({
   };
 
   const onDeleteTodo = () => {
-    onDeleteTask(task);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "your task has been delete!",
+          icon: "success",
+        }).then(() => onDeleteTask(task));
+      }
+    });
   };
 
   return (
