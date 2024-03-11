@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import style from "./TaskCard.module.css";
 import { FiEdit } from "react-icons/fi";
 import { MdDoneOutline } from "react-icons/md";
