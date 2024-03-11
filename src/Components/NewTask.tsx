@@ -3,6 +3,12 @@ import style from "./NewTask.module.css";
 import TaskFunction from "../models/TaskFunction.td";
 import Task from "../models/Task.td";
 
+const myTodo: Task = {
+  id: "",
+  Title: "",
+  Description: "",
+  completed: false,
+};
 export const NewTask = ({
   newTaskFunction,
   updatedTaskFunction,
@@ -10,11 +16,11 @@ export const NewTask = ({
 }: TaskFunction) => {
   const [Title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [todo, setTodo] = useState<Task>(task || null);
+  const [EditTodo, setEditTodo] = useState<Task>(myTodo);
 
   useEffect(() => {
-    setTodo(task);
-  }, [setTodo, task]);
+    setEditTodo(task);
+  }, [task]);
 
   function onInputChange(ev: { target: { value: SetStateAction<string> } }) {
     setTitle(ev.target.value);
@@ -29,13 +35,12 @@ export const NewTask = ({
   const onClear = () => {
     setTitle("");
     setDescription("");
-    setTodo(null);
   };
 
   const onCreateTask = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     task = {
-      id: 0,
+      id: "",
       Title: Title,
       Description: description,
       completed: false,
@@ -47,12 +52,11 @@ export const NewTask = ({
   const onEditTask = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     const UpdatedTask: Task = {
-      id: 0,
-      Title: todo.Title,
-      Description: todo.Description,
+      id: EditTodo.id,
+      Title: EditTodo.Title,
+      Description: EditTodo.Description,
       completed: false,
     };
-
     console.log(UpdatedTask);
     updatedTaskFunction(UpdatedTask);
     onClear();
@@ -60,21 +64,23 @@ export const NewTask = ({
 
   return (
     <>
-      {task ? (
+      {EditTodo ? (
         <div className={style.container}>
           <form className={style.form} onSubmit={onEditTask}>
             <input
               type="text"
               placeholder="Title..."
-              value={todo?.Title || ""}
-              onChange={(ev) => setTodo({ ...todo!, Title: ev.target.value })}
+              value={EditTodo?.Title || ""}
+              onChange={(ev) =>
+                setEditTodo({ ...EditTodo!, Title: ev.target.value })
+              }
             />
             <textarea
               placeholder="Description..."
               maxLength={200}
-              value={todo?.Description || ""}
+              value={EditTodo?.Description || ""}
               onChange={(ev) =>
-                setTodo({ ...todo!, Description: ev.target.value })
+                setEditTodo({ ...EditTodo!, Description: ev.target.value })
               }
             ></textarea>
             <button type="submit" className={style.btn_btn_primary}>

@@ -4,10 +4,11 @@ import { NewTask } from "./NewTask";
 import { TaskCard } from "./TaskCard";
 import style from "./TaskList.module.css";
 import taskArray from "../Persistence/db";
+import { v4 as uuid4 } from "uuid";
 
 export const TaskList = () => {
   const [todos, setTodos] = useState(taskArray);
-  const [todo, setTodo] = useState<Task>();
+  const [todo, setTodo] = useState<null | Task>();
 
   // Here i call the item todolist in the localstorage
   const todolist = JSON.parse(localStorage.getItem("todolist")!);
@@ -18,19 +19,19 @@ export const TaskList = () => {
   }
 
   const onCreateNewTask = (task: Task) => {
-    if (task.Title === "") return;
+    if (task.Title === "" || task.Description === "") return;
 
-    task.id = todos?.length + 1;
+    task.id = uuid4();
+    console.log(task.id);
     setTodos([task, ...todos]);
     localStorage.setItem("todolist", JSON.stringify([task, ...todos]));
   };
 
   const onEditTask = (task: Task) => {
-    console.log(task);
     const todo = todos.filter((todo) => todo.id === task.id);
 
-    todo.forEach((el) => {
-      setTodo(el);
+    todo.forEach((elTodo) => {
+      setTodo(elTodo);
     });
 
     const newArray = todos.filter((todo) => todo.id !== task.id);
@@ -39,9 +40,12 @@ export const TaskList = () => {
   };
 
   const onUpdatedTask = (task: Task) => {
-    task.id = todos?.length + 1;
+    if (task.Title === "" || task.Description === "") return;
+
+    task.id = uuid4();
     setTodos([task, ...todos]);
     localStorage.setItem("todolist", JSON.stringify([task, ...todos]));
+    setTodo(null);
   };
 
   useEffect(() => {

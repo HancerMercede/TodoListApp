@@ -1,5 +1,6 @@
+
 interface Task {
-    id: number,
+    id:string,
     Title: string
     Description: string,
     completed: boolean
